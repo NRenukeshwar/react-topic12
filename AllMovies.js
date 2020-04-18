@@ -36,7 +36,7 @@ function AllMovies(props)
         </tbody>
       </table>
       <br/>
-      <Link to="/addmovie"><button class="btn btn-info btn-sm">+ Add Movie</button></Link>
+      <Link to="/addmovie"><button className="btn btn-info btn-sm">+ Add Movie</button></Link>
     </div>
   )
 }
