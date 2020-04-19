@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function AllMovies(props)
 {
   const movies=props.movies.map((m)=>
-      <tr key={m.movieId} style={{borderBottom:"2px solid white"}}>
+      <tr key={m.movieId} style={{border:"2px solid white"}}>
         <td><Link to={`/${m.movieId}`} className="font-weight-bold" style={{fontSize:"18px"}}>{m.movieId}</Link></td>
         <td>{m.movieName}</td>
         <td>{m.leadActor}</td>
@@ -37,7 +37,7 @@ function AllMovies(props)
         </tbody>
       </table>
 
-      <Link to="/addmovie"><button className="btn btn-info btn-sm">+ Add Movie</button></Link>
+      <Link to="/addmovie"><button className="btn btn-primary btn-sm">+ Add Movie</button></Link>
     </div>
   )
 }
