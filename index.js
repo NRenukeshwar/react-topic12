@@ -3,12 +3,9 @@ import { render } from 'react-dom';
 import AddMovie from './AddMovie';
 import ViewMovie from './ViewMovie';
 import AllMovies from './AllMovies';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header'
-import {BrowserRouter, Switch,
-  Route,
-  Link 
-} from "react-router-dom";
+import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
@@ -144,26 +141,43 @@ class App extends Component {
       ]
     };
   }
-  handleMovie=(event,movie)=>{
+  handleDeleteMovie=(event,id)=>{
     event.preventDefault()
+    const movies=this.state.movies.filter((m)=>m.movieId!==id)
     this.setState({
-      movie:movie
+      movies:movies
     })
-    console.log(movie)
+    alert("Movie Deleted Successfully")
   }
+
+  handleAddMovie=(m,e)=>{
+    e.preventDefault()
+
+    const id=this.state.movies.length > 0 ? Math.max(...this.state.movies.map(m => m.movieId)) + 1 : 1;
+    const movie={
+      movieId:`${id}`,
+      ...m
+    }
+    const movies = this.state.movies
+    movies.push(movie);
+    this.setState({
+      movies:movies
+    })
+  }
+
   render() {
     return (
-      <div>
+      <div style={{backgroundColor:'#00FFC3', minHeight:'100vh'}}>
         <Header/>
         <Switch>
-          <Route exact path="/addMovie">
-            <AddMovie name={this.state.name} />
+          <Route path="/addMovie">
+            <AddMovie name={this.state.name}  handleAddMovie={this.handleAddMovie}/>
           </Route>
-          <Route exact path="/:id">
+          <Route path="/:id">
             <ViewMovie movies={this.state.movies}/>
           </Route>
           <Route path="/">
-            <AllMovies movies={this.state.movies} handleMovie={this.handleMovie}/>
+            <AllMovies movies={this.state.movies} handleDeleteMovie={this.handleDeleteMovie}/>
           </Route>
         </Switch>
         

@@ -1,18 +1,16 @@
 import React from "react";
-import {Label, Input} from 'reactstrap'
-import {Link} from 'react-router-dom'
+import { Label, Input } from "reactstrap";
+import { Link } from "react-router-dom";
 class AddMovie extends React.Component {
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-     movieId:'',
-     movieName:'',
-     leadActor:'',
-     leadActress:'',
-     yearOfRelease:'',
-     language:'',
-     collection:''
+      movieName: "",
+      leadActor: "",
+      leadActress: "",
+      yearOfRelease: "",
+      language: "",
+      collection: ""
     };
   }
 
@@ -26,22 +24,44 @@ class AddMovie extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const movie={
-      movieName:this.state.movieName,
-     leadActor:this.state.leadActor,
-     leadActress:this.state.leadActress,
-     yearOfRelease:this.state.yearOfRelease,
-     language:this.state.language,
-     collection:this.state.collection
+    if (
+      this.state.movieName != "" &&
+      this.state.leadActor != "" &&
+      this.state.leadActress != "" &&
+      this.state.yearOfRelease != "" &&
+      this.state.language != "" &&
+      this.state.collection != ""
+    ) {
+      const movie = {
+        movieName: this.state.movieName,
+        leadActor: this.state.leadActor,
+        leadActress: this.state.leadActress,
+        yearOfRelease: this.state.yearOfRelease,
+        language: this.state.language,
+        collection: this.state.collection
+      };
+      this.props.handleAddMovie(movie, event);
+      alert("--Movie Added successfully--");
+      setTimeout(
+        this.setState({
+          movieName: "",
+          leadActor: "",
+          leadActress: "",
+          yearOfRelease: "",
+          language: "",
+          collection: ""
+        }),
+        1000
+      );
+    } else {
+      alert("All feilds are mandatory");
     }
-    console.log(movie)
   };
 
   render() {
-    const year=Number(new Date().getFullYear())
+    const year = Number(new Date().getFullYear());
     return (
       <div className="container mt-3">
-      
         <h2 className="text-warning text-center">Add Movie</h2>
         <form onSubmit={this.handleSubmit} className="">
           <div className="form-group row col-sm-6 mx-auto">
@@ -109,14 +129,16 @@ class AddMovie extends React.Component {
           </div>
           <div className="form-group row col-sm-6 mx-auto">
             <Label for="language">Movie language</Label>
-            <select  id="language"
+            <select
+              id="language"
               name="language"
               className="form-control"
               value={this.state.language}
               onChange={event => {
                 this.handleChange(event);
               }}
-              required>
+              required
+            >
               <option value="">Select language</option>
               <option value="Telugu">Telugu</option>
               <option value="Hindi">Hindi</option>
@@ -141,13 +163,24 @@ class AddMovie extends React.Component {
             />
           </div>
           <div className="d-flex justify-content-center">
-          <Link to="/"><button type="button" id="cancel" name="cancel" className="btn btn-secondary mr-2">
-            Back
-          </button>
-          </Link>
-          <button type="submit" id="submit" name="submit" className="btn btn-success">
-            Add
-          </button>
+            <Link to="/">
+              <button
+                type="button"
+                id="cancel"
+                name="cancel"
+                className="btn btn-secondary mr-2"
+              >
+                Back
+              </button>
+            </Link>
+            <button
+              type="submit"
+              id="submit"
+              name="submit"
+              className="btn btn-success"
+            >
+              Add
+            </button>
           </div>
         </form>
       </div>

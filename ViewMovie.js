@@ -1,45 +1,49 @@
-import React from 'react'
-import { useParams } from "react-router-dom";
-function ViewDetail(props)
-{
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import { Card, CardHeader, CardBody, CardFooter, Button } from "reactstrap";
+function ViewDetail(props) {
+
   let { id } = useParams();
 
-  const movie=props.movies.filter((m)=>m.movieId===id)
-  return(
+  const movie = props.movies.filter(m => m.movieId === id);
+  return (
     <div className="container">
-      <h2 className="text-center">Movie Details</h2>
-      <table className="table table-bordered text-center">
-        <tr>
-           <th>Movie ID</th>
-            <td>{movie[0].movieId}</td>
-          </tr>
-          <tr>
-            <th>Movie Name</th>
-             <td>{movie[0].movieName}</td>
-          </tr>
-          <tr>
-            <th>Lead Actor</th>
-             <td>{movie[0].leadActor}</td>
-           </tr>
-          <tr> 
-            <th>Lead Actres</th>
-            <td>{movie[0].leadActress}</td>
-            </tr>
-          <tr>
-            <th>Year of Release</th>
-            <td>{movie[0].yearOfRelease}</td>
-            </tr>
-          <tr>
-            <th>Language</th>
-            <td>{movie[0].language}</td>
-            </tr>
-          <tr>
-            <th>Collections</th>
-            <td>{movie[0].collection}</td>
-        </tr>
-      </table>
+      <h4 className="text-center">Movie Details</h4>
+      <Card
+        body
+        outline
+        color="white"
+        className="row col-sm-6 mx-auto"
+        style={{backgroundColor:'#B2FEE3'}}
+      >
+        <CardHeader
+          className="text-white text-center"
+          style={{backgroundColor:'#29D293'}}
+          tag="h4"
+        >
+          {movie[0].movieName}
+        </CardHeader>
+        <CardBody className="text-center">
+          <b>Movie ID:</b> {movie[0].movieId}
+          <br />
+          <b>Movie Name:</b> {movie[0].movieName}
+          <br />
+          <b>Lead Actor:</b> {movie[0].leadActor}
+          <br />
+          <b>Lead Actres:</b> {movie[0].leadActress}
+          <br />
+          <b>Year of Release:</b> {movie[0].yearOfRelease}
+          <br />
+          <b>Language:</b> {movie[0].language}
+          <br />
+          <b>Collections:</b> {movie[0].collection}
+        </CardBody>
+        <Link to="/" className="text-center">
+          <Button color="info">Back</Button>
+        </Link>
+      </Card>
     </div>
-  )
+  );
 }
 
-export default ViewDetail
+export default ViewDetail;
