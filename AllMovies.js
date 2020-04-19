@@ -16,7 +16,6 @@ function AllMovies(props)
       </tr>
     )
   
-  
   return(
   <div className="container" align="center">
       <table className="table table-responsive table-hover text-center mt-3">
